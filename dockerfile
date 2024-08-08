@@ -13,6 +13,9 @@ ARG COMMIT_SHA
 #store the git sha id into the file
 RUN echo ${COMMIT_SHA} > commit_sha.txt
 
+#Upgrade pip
+RUN pip install --upgrade pip
+
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
