@@ -10,6 +10,21 @@ RubyKInfoLog is an open-source Python application built using Flask, designed to
 
 The RubyKInfoLog application provides an endpoint `/info` that responds to HTTP GET and POST requests. The endpoint returns a JSON response containing service information, including the service name, version, Git commit SHA, and environment variables. The application also logs the request details in a structured JSON format.
 
+At the Start of Application:
+
+When you run the Flask application (app.run(...)), it starts a web server that listens for incoming HTTP requests.
+Request to /info Endpoint:
+
+When a client (e.g., a browser or a monitoring tool) makes a GET request to the /info endpoint, the Flask application triggers the get_info() function.
+
+Inside get_info() Function: calls get_git_commit_sha() to retrieve the Git commit SHA , calls log_request_as_json(request, 200) to log details about the incoming request.
+
+Inside log_request_as_json(request, status_code): The function constructs _log_data_ with details about the request (e.g., IP address, method, URL, status code). Calls my_logger_setup() to create and configure the logger, StreamHandler is attached to the logger, and the formatter is set to output the message only. Logger is returned to log_request_as_json.
+
+Back in log_request_as_json, the JSON string is logged using mylogger.info(json_log). The log_request_as_json function completes and returns to get_info().
+
+The get_info() function sends a JSON response back to the client, containing the infoResult dictionary
+
 ### Key Features
 
 - **Logging**: Logs requests in JSON format with details such as IP address, request method, URL, and timestamp.
